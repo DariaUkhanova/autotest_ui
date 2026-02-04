@@ -6,21 +6,15 @@ from pages.courses_list_page import CoursesListPage
 
 @pytest.mark.courses
 @pytest.mark.regression
-def test_empty_courses_list(chromium_page_with_state):
+def test_empty_courses_list(courses_list_page: CoursesListPage):
 
-        chromium_page_with_state.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
+        courses_list_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
 
-        title_text = chromium_page_with_state.get_by_test_id("courses-list-toolbar-title-text")
-        expect(title_text).to_be_visible()
-
-        folder_icon = chromium_page_with_state.get_by_test_id("courses-list-empty-view-icon")
-        expect(folder_icon).to_be_visible()
-
-        empty_results_text = chromium_page_with_state.get_by_test_id("courses-list-empty-view-title-text")
-        expect(empty_results_text).to_be_visible()
-
-        empty_result_description = chromium_page_with_state.get_by_test_id("courses-list-empty-view-description-text")
-        expect(empty_result_description).to_be_visible()
+        courses_list_page.navbar.check_visible("username")
+        courses_list_page.sidebar.check_visible()
+        courses_list_page.check_visible_courses_title()
+        courses_list_page.check_visible_create_course_button()
+        courses_list_page.check_visible_empty_view()
 
 
 
